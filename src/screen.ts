@@ -1,18 +1,18 @@
-import {pointInsideFrame} from './calc';
+import { pointInsideFrame } from './calc';
 
-export {screenAt};
+export { screenAt };
 
 /**
  * Returns the screen at the provided point.
  */
 function screenAt(point: Point) {
-	const screens = Screen.all();
+  const screens = Screen.all();
 
-	for (const s of screens) {
-		if (pointInsideFrame(point, s.flippedFrame())) {
-			return s;
-		}
-	}
+  for (const s of screens) {
+    if (pointInsideFrame(point, s.flippedFrame())) {
+      return s;
+    }
+  }
 
-	throw new Error('point out of range');
+  throw new Error('point out of range');
 }
