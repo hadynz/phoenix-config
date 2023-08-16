@@ -5,7 +5,7 @@ Key.on('t', HyperKey, () =>
   recallApp({
     appName: 'Things',
     launchAppName: 'Things3',
-    toggleWhenActive: false,
-    moveToCurrentSpace: false,
+    toggleWhenActive: true,
+    moveToCurrentSpace: true,
   }),
 );
