@@ -4,7 +4,7 @@
   "description": "Configuration for kasper/phoenix written in TypeScript",
   "author": "Hady Osman",
   "license": "MIT",
-  "main": "src/phoenix.ts",
+  "main": "src/index.ts",
   "scripts": {
     "start": "yarn run watch",
     "watch": "webpack --watch --config webpack.prod.js",

@@ -7,8 +7,8 @@ const os = require('os');
 
 module.exports = {
   entry: {
-    'phoenix.js': './src/phoenix.ts',
-    'phoenix.debug.js': './src/phoenix.ts',
+    'phoenix.js': './src/index.ts',
+    'phoenix.debug.js': './src/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'out'),

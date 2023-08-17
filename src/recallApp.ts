@@ -1,3 +1,7 @@
+const launchApp = (appName: string) => {
+  App.launch(appName, { focus: true });
+};
+
 type RecallAppOptions = {
   appName: string;
   launchAppName?: string;
@@ -9,18 +13,19 @@ type RecallAppOptions = {
  * Recalls a given application by either launching or focusing it
  */
 export const recallApp = (options: RecallAppOptions) => {
-  const { appName, launchAppName, toggleWhenActive: toggleActive, moveToCurrentSpace } = options;
+  const { appName, launchAppName, toggleWhenActive, moveToCurrentSpace } =
+    options;
   const app = App.get(appName);
 
   if (app == null) {
-    App.launch(launchAppName || appName, { focus: true });
-  } else if (app.isActive() && toggleActive) {
+    launchApp(launchAppName || appName);
+  } else if (app.isActive() && toggleWhenActive) {
     app.hide();
   } else {
     if (moveToCurrentSpace) {
       const space = Space.active();
       space?.moveWindows([app.mainWindow() as Window, ...app.windows()]);
     }
-    app.focus();
+    launchApp(launchAppName || appName);
   }
-}
+};
