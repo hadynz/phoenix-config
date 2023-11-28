@@ -1,19 +1,9 @@
-import { HyperKey, ShiftHyperKey } from './modifiers';
-import { recallApp } from './recallApp';
+import { ShiftHyperKey } from './modifiers';
+import { recall } from './recallApp';
 
-Key.on(
-  't',
-  HyperKey,
-  recallApp({
-    appName: 'Things',
-    launchAppName: 'Things3',
-  }),
-);
+recall(ShiftHyperKey, 't', 'Things', 'Things3');
+recall(ShiftHyperKey, 'o', 'Obsidian');
+recall(ShiftHyperKey, 'w', 'Warp');
 
-Key.on(
-  't',
-  ShiftHyperKey,
-  recallApp({
-    appName: 'Terminal',
-  }),
-);
+// Add move to desktop #
+// Open or switch to app

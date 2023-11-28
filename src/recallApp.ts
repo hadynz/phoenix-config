@@ -12,7 +12,7 @@ type RecallAppOptions = {
 /**
  * Recalls an application to the current active space by either launching or focusing it
  */
-export const recallApp =
+const recallApp =
   ({
     appName,
     launchAppName,
@@ -34,3 +34,19 @@ export const recallApp =
       launchApp(launchAppName || appName);
     }
   };
+
+export const recall = (
+  modifiers: Phoenix.ModifierKey[],
+  key: Phoenix.KeyIdentifier,
+  appName: string,
+  launchAppName?: string,
+) => {
+  Key.on(
+    key,
+    modifiers,
+    recallApp({
+      appName,
+      launchAppName,
+    }),
+  );
+};
