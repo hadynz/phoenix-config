@@ -39,14 +39,15 @@ export const recall = (
   modifiers: Phoenix.ModifierKey[],
   key: Phoenix.KeyIdentifier,
   appName: string,
-  launchAppName?: string,
+  options?: { launchAppName?: string; moveToCurrentSpace?: boolean },
 ) => {
   Key.on(
     key,
     modifiers,
     recallApp({
       appName,
-      launchAppName,
+      launchAppName: options?.launchAppName,
+      moveToCurrentSpace: options?.moveToCurrentSpace ?? true,
     }),
   );
 };
