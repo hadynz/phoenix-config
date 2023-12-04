@@ -1,7 +1,12 @@
-import { cycleWindow, resizeWindow } from './windowSizing';
-import { ShiftHyperKey } from './modifiers';
-import { moveToSpace } from './moveToSpace';
-import { recall } from './recallApp';
+import { ShiftHyperKey } from './constants';
+import { moveToSpace } from './move-to-space';
+import { recall } from './recall-app';
+import { cycleWindow, resizeWindow } from './window-sizing';
+
+Phoenix.set({
+  daemon: true,
+  openAtLogin: true,
+});
 
 recall(ShiftHyperKey, 't', 'Things', { launchAppName: 'Things3' });
 recall(ShiftHyperKey, 'o', 'Obsidian');
@@ -18,23 +23,14 @@ moveToSpace(ShiftHyperKey, '7', 7);
 moveToSpace(ShiftHyperKey, '8', 8);
 moveToSpace(ShiftHyperKey, '9', 9);
 
-const padding = 10;
+const padding = 0;
 
-resizeWindow(ShiftHyperKey, 'q', { width: 0.25, index: 1, padding });
-resizeWindow(ShiftHyperKey, 'e', { width: 0.25, index: 3, padding });
-resizeWindow(ShiftHyperKey, 'r', { width: 0.25, index: 4, padding });
+resizeWindow(ShiftHyperKey, '1', { width: 0.2, index: 1, padding });
+resizeWindow(ShiftHyperKey, '2', { width: 0.5, index: 2, padding });
+resizeWindow(ShiftHyperKey, '3', { width: 0.25, index: 3, padding });
+resizeWindow(ShiftHyperKey, '4', { width: 0.25, index: 4, padding });
 
-cycleWindow(ShiftHyperKey, 'p', { direction: 'left', width: 0.25, padding });
-cycleWindow(ShiftHyperKey, '[', { direction: 'right', width: 0.25, padding });
+cycleWindow(ShiftHyperKey, 'p', { direction: 'left', width: 0.5, padding });
+cycleWindow(ShiftHyperKey, '[', { direction: 'right', width: 0.5, padding });
 
-const screenFrame = Screen.main().flippedVisibleFrame();
-const modal = new Modal();
-modal.isInput = true;
-modal.appearance = 'light';
-modal.origin = {
-  x: screenFrame.width / 2 - modal.frame().width / 2,
-  y: screenFrame.height / 2 - modal.frame().height / 2,
-};
-modal.textDidChange = (value) => {
-  console.log('Text did change:', value);
-};
+Phoenix.notify('Phoenix configuration reloaded');

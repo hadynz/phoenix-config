@@ -10,9 +10,9 @@
     "noFallthroughCasesInSwitch": true,
     "pretty": true,
     "stripInternal": true,
-    "types": ["phoenix"],
+    "types": ["phoenix", "jest"],
     "typeRoots": ["node_modules/@types"],
     "lib": ["ES2021"]
   },
-  "exclude": ["node_modules"]
+  "include": ["src/**/*", ".eslintrc.cjs"]
 }
