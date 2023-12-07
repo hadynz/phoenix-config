@@ -4,10 +4,17 @@ const printWindow = (window: Window) => {
   );
 };
 
-const intersectsX = (rectangle1: Rectangle, rectangle2: Rectangle) => {
+const isIntersectingX = (rectangle1: Rectangle, rectangle2: Rectangle) => {
   return (
     rectangle1.x < rectangle2.x + rectangle2.width &&
     rectangle1.x + rectangle1.width > rectangle2.x
+  );
+};
+
+const isOverlappingX = (rectangle1: Rectangle, rectangle2: Rectangle) => {
+  return (
+    rectangle1.x <= rectangle2.x &&
+    rectangle1.x + rectangle1.width >= rectangle2.x + rectangle2.width
   );
 };
 
@@ -19,10 +26,24 @@ type ShrinkWindowOptions = {
 export const shrinkWindow = ({ toShrink, relativeTo }: ShrinkWindowOptions) => {
   const toShrinkFrame = toShrink.frame();
   const relativeToFrame = relativeTo.frame();
+
+  const isOverlapping = isOverlappingX(relativeToFrame, toShrinkFrame);
+  if (isOverlapping) {
+    return; // Complete overlap... no shrinking required
+  }
+
+  const isLeftOfRelativeTo = toShrinkFrame.x < relativeToFrame.x;
   toShrink.setFrame({
-    x: toShrinkFrame.x,
+    x: isLeftOfRelativeTo
+      ? toShrinkFrame.x
+      : relativeToFrame.x + relativeToFrame.width,
     y: toShrinkFrame.y,
-    width: relativeToFrame.x - toShrinkFrame.x,
+    width: isLeftOfRelativeTo
+      ? relativeToFrame.x - toShrinkFrame.x
+      : toShrinkFrame.x +
+        toShrinkFrame.width -
+        relativeToFrame.x -
+        relativeToFrame.width,
     height: toShrinkFrame.height,
   });
 };
@@ -44,7 +65,7 @@ const expandWindow = ({ from, to }: ExpandWindowOptions) => {
 };
 
 const shrinkOrExpand = (window: Window, neighbour: Window) => {
-  const isOverlapping = intersectsX(window.frame(), neighbour.frame());
+  const isOverlapping = isIntersectingX(window.frame(), neighbour.frame());
   if (isOverlapping) {
     shrinkWindow({ toShrink: window, relativeTo: neighbour });
   } else {
