@@ -1,6 +1,7 @@
 import { ShiftHyperKey } from './constants';
 import { moveToSpace } from './move-to-space';
 import { recall } from './recall-app';
+import { tileWindows } from './tiling';
 import { cycleWindow, resizeWindow } from './window-sizing';
 
 Phoenix.set({
@@ -32,5 +33,7 @@ resizeWindow(ShiftHyperKey, '4', { width: 0.25, index: 4, padding });
 
 cycleWindow(ShiftHyperKey, 'p', { direction: 'left', width: 0.5, padding });
 cycleWindow(ShiftHyperKey, '[', { direction: 'right', width: 0.5, padding });
+
+tileWindows(ShiftHyperKey, 'l');
 
 Phoenix.notify('Phoenix configuration reloaded');
